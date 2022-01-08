@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="bibliomatriz.js" ></script>
+	</head>
+	<body>
+		<p>
+			<div>
+				<a style="background-color: #ddd">JSON: <input type="checkbox" id="tipo" /></a>
+				<a style="background-color: #ddd">Crear solo si no existe: <input type="checkbox" id="unificado" /></a>
+				<a style="background-color: #ddd">Ruta: <input id="ruta" style="background-color: #eee" /></a>
+				<a style="background-color: #ddd">Nombre: <input id="nombre" style="background-color: #eee" /></a>
+				<button onclick="crear_bibliomatriz()" style="background-color: #eee" >Crear</button>
+				<button onclick="borrar_bibliomatriz()" style="background-color: #eee" >Borrar</button>
+				<button onclick="vaciar_log()" style="background-color: #eee" >Vaciar log</button>
+			</div>
+		</p>
+		<div>Nota: La opción JSON crea un solo archivo unificando todas las tablas. Si se desactiva crea una carpeta.</div>
+		<p>
+			<div style="background-color: #ddd">
+				<div>Registro</div>
+				<pre style="background-color: #eee">
+				</pre>
+			</div>
+		</p>
+	</body>
+</html>
