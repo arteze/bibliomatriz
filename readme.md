@@ -59,6 +59,10 @@ De esta manera, `unibinop` tiene cuatro posibles estados:
  - `2` Crea el archivo __.json__ y fuerza el reemplazo.
  - `3` Crea el archivo __.json__ solo si no existe.
 
+### ✅ `borrar_bibliomatriz`: Borra la bibliomatriz
+
+ - `bibma`: Biblioteca.
+
 ### `crear_tabla`: Crea una nueva tabla
 
  - `bibma`: Biblioteca.
@@ -97,10 +101,6 @@ De esta manera, `unibinop` tiene cuatro posibles estados:
 
  - `bibma`: Biblioteca.
  - `tabla`: Nombre de la tabla.
-
-### `borrar_bibliomatriz`: Borra la bibliomatriz
-
- - `bibma`: Biblioteca.
 
 ### `ver`: Convierte la bibliomatriz a diferentes formatos
 
