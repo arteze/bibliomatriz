@@ -9,15 +9,15 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 ## Ejemplos de cada función:
 
 ```php
-$b = crear_bibliomatriz("b",3);          // bibma = c(ruta,unibinop)
-crear_tabla($b,"t",["c0","c1","c2"]);   // c(bibma,tabla,fila)
-apilar($b,"t",["v0 v1 v2"]);           // a(bibma,tabla,fila)
+$b = crear_bibliomatriz("b","B",3);   // bibma = c(ruta,nombre,unibinop)
+crear_tabla($b,"t",["c0","c1","c2"]); // c(bibma,tabla,fila)
+apilar($b,"t",["v0 v1 v2"]);          // a(bibma,tabla,fila)
 buscar($b,"t","c","v");               // b(bibma,tabla,clave,valor)
-cambiar($b,"t","c","v",["w0","w1"]); // c(bibma,tabla,clave,valor,fila)
-borrar_filas($b,"t","c0","v");      // b(bibma,tabla,clave,valor)
-borrar_tabla($b,"t");              // b(bibma,tabla)
-borrar_bibliomatriz($b);          // b(bibma)
-ver($b,"html",1);                // v(bibma,formato,binop)
+cambiar($b,"t","c","v",["w0","w1"]);  // c(bibma,tabla,clave,valor,fila)
+borrar_filas($b,"t","c0","v");        // b(bibma,tabla,clave,valor)
+borrar_tabla($b,"t");                 // b(bibma,tabla)
+borrar_bibliomatriz($b);              // b(bibma)
+ver($b,"html",1);                     // v(bibma,formato,binop)
 ```
 
 ## Explicaciones:
