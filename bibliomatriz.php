@@ -186,6 +186,7 @@ function borrar_bibliomatriz($ruta,$unibinop_s){
 	$o->tipo =      intdiv($unibinop,2**0)%2;
 	$o->unificado = intdiv($unibinop,2**1)%2;
 	generar_url  ($ruta,$o->unificado,$o);
+	$o->url = "libros/$o->url";
 	borrar_url($o->url,$o);
 	return $o;
 }
