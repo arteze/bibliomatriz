@@ -4,9 +4,10 @@ ini_set("display_errors","1");
 ini_set("display_startup_errors","1");
 error_reporting(E_ALL);
 
-function mostrar_log($v){
-	$volcado = print_r($v, true);
-	echo "<pre style='background-color: #eee'>".htmlentities($volcado)."</pre>";
+function declarar_get($array){
+	foreach( $array as $variable ){
+		define($variable, $_GET[$variable]??null);
+	}
 }
 function borrar_archivo($ruta,$o){
 	$bin_url_inicio_barra = substr($ruta,0,1)=="/";
@@ -126,51 +127,72 @@ function obtener_info($ruta){
 ";
 }
 function crear_bibliomatriz_carpeta_contenido($o){
-	crear_archivo($o->url."/info.txt",obtener_info($o->url),$o);
+	crear_archivo($o->url."/info.txt",obtener_info($o->nombre),$o);
 	crear_archivo($o->url."/bibliomatriz.json",$o->datos,$o);
+}
+function generar_url($ruta,$unificado,$o){
+	if($unificado){
+		$o->url = "$ruta.json";
+	}else{
+		$o->url = "$ruta";
+	}
+}
+function generar_datos($ruta,$unificado,$nombre,$o){
+	if($unificado){
+		$o->datos = json_encode(array($ruta,$nombre))."\n";
+	}else{
+		$o->datos = json_encode(array($nombre))."\n";
+	}
 }
 function crear_bibliomatriz($ruta,$nombre,$unibinop){
 	$o = (object)array();
 	$o->bibma = array();
-	$o->registro = array();
+	$o->registro = array("Creando bibliomatriz.");
 	$o->unibinop = $unibinop;
-	$tipo =	  intdiv($unibinop,2**0)%2;
-	$unificado = intdiv($unibinop,2**1)%2;
-	if($unificado){
-		$o->url = "$ruta.json";
-		$o->datos = json_encode(array($ruta,$nombre))."\n";
-	}else{
-		$o->url = "$ruta";
-		$o->datos = json_encode(array($nombre))."\n";
-	}
-	echo "<div>Tipo: $tipo; Unificado: $unificado</div>";
-	if($tipo==0){
+	$o->tipo =      intdiv($unibinop,2**0)%2;
+	$o->unificado = intdiv($unibinop,2**1)%2;
+	generar_url  ($ruta,$o->unificado,$o);
+	generar_datos($ruta,$o->unificado,$nombre,$o);
+	$o->nombre = $nombre;
+	$o->url = "libros/$o->url";
+	array_push($o->registro,"¿Es un JSON unificado?: $o->unificado; Crear solo si no existe: $o->tipo; Nombre: $o->nombre");
+	if($o->tipo==0){
 		borrar_url($o->url,$o);
-		if($unificado==0){
+		if($o->unificado==0){
 			crear_carpeta($o->url,$o);
 			crear_bibliomatriz_carpeta_contenido($o);
 		}
-		if($unificado==1){
+		if($o->unificado==1){
 			crear_archivo($o->url,$o->datos,$o);
 		}
 	}
-	if($tipo==1){
-		if($unificado==0){
+	if($o->tipo==1){
+		if($o->unificado==0){
 			$real_url_creada = crear_carpeta_si_no_existe($o->url,$o);
 			if( $real_url_creada==1 || $real_url_creada==2 ){
 				crear_bibliomatriz_carpeta_contenido($o);
 			}
 		}
-		if($unificado==1){
+		if($o->unificado==1){
 			$real_url_creada = crear_archivo_si_no_existe($o->url,$o->datos,$o);
 		}
 	}
 	return $o;
 }
-function borrar_bibliomatriz($bibma){
+function borrar_bibliomatriz($ruta,$unibinop_s){
 	$o = (object)array();
-	$o->registro = array();
-	borrar_url($bibma->url,$o);
+	$o->registro = array("Borrando bibliomatriz.");
+	$unibinop = intval($unibinop_s);
+	$o->tipo =      intdiv($unibinop,2**0)%2;
+	$o->unificado = intdiv($unibinop,2**1)%2;
+	generar_url  ($ruta,$o->unificado,$o);
+	borrar_url($o->url,$o);
 	return $o;
 }
+
+declarar_get(array("f","r","n","u"));
+
+if(f=="c"){echo json_encode(crear_bibliomatriz(r,n,u));}
+if(f=="b"){echo json_encode(borrar_bibliomatriz(r,u));}
+
 ?>
