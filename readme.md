@@ -74,7 +74,7 @@ Para crear el parámetro `unibinop` es necesario hacer una multiplicación:
  - `clave`: Nombre de la columna.
  - `valor`: Valor de la celda que pertenece a la columna.
 
-### `borrar_tabla`: Borra las filas que coinciden con clave y valor
+### `borrar_tabla`: Borra la tabla
 
  - `bibma`: Biblioteca.
  - `tabla`: Nombre de la tabla.
