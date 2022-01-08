@@ -8,7 +8,7 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 
 ## Funciones principales
 
- - ✅ `crear_bibliomatriz`
+ - ✅ [`crear_bibliomatriz`](#-crear_bibliomatriz-crea-una-nueva-bibliomatriz)
  - ✅ `borrar_bibliomatriz`
  - `crear_tabla`
  - `apilar`
