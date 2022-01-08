@@ -149,8 +149,8 @@ function crear_bibliomatriz($ruta,$nombre,$unibinop){
 	$o->bibma = array();
 	$o->registro = array("Creando bibliomatriz.");
 	$o->unibinop = $unibinop;
-	$o->tipo =      intdiv($unibinop,2**0)%2;
-	$o->unificado = intdiv($unibinop,2**1)%2;
+	$o->unificado = intdiv($unibinop,2**0)%2;
+	$o->tipo =      intdiv($unibinop,2**1)%2;
 	generar_url  ($ruta,$o->unificado,$o);
 	generar_datos($ruta,$o->unificado,$nombre,$o);
 	$o->nombre = $nombre;
