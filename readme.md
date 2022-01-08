@@ -8,7 +8,7 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 
 ## Funciones principales
 
- - ✅ [`crear_bibliomatriz`](#-crear_bibliomatriz-crea-una-nueva-bibliomatriz)
+ - ✅ [`crear_bibliomatriz`](#crear_bibliomatriz-crea-una-nueva-bibliomatriz)
  - ✅ `borrar_bibliomatriz`
  - `crear_tabla`
  - `apilar`
@@ -34,7 +34,7 @@ ver($b,"html",1);                     // v(bibma,formato,binop)
 
 ## Explicaciones:
 
-### ✅ `crear_bibliomatriz`: Crea una nueva bibliomatriz
+### `crear_bibliomatriz`: Crea una nueva bibliomatriz
 
  - `ruta`: Ruta de la carpeta o archivo JSON.
  - `unibinop`: Opciones binarias unificadas.
@@ -59,7 +59,7 @@ De esta manera, `unibinop` tiene cuatro posibles estados:
  - `2` Crea el archivo __.json__ y fuerza el reemplazo.
  - `3` Crea el archivo __.json__ solo si no existe.
 
-### ✅ `borrar_bibliomatriz`: Borra la bibliomatriz
+### `borrar_bibliomatriz`: Borra la bibliomatriz
 
  - `bibma`: Biblioteca.
 
