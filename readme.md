@@ -44,6 +44,13 @@ Para crear el parámetro `unibinop` es necesario hacer una multiplicación:
 
  - `unificado * 2 + tipo`
 
+De esta manera, `unibinop` tiene cuatro posibles estados:
+
+ - `0` Crea la carpeta y fuerza el reemplazo.
+ - `1` Crea la carpeta solo si no existe.
+ - `2` Crea el archivo __.json__ y fuerza el reemplazo.
+ - `3` Crea el archivo __.json__ solo si no existe.
+
 ### `crear_tabla`: Crea una nueva tabla
 
  - `bibma`: Biblioteca.
