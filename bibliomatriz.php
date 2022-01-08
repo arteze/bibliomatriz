@@ -179,21 +179,25 @@ function crear_bibliomatriz($ruta,$nombre,$unibinop){
 	}
 	return $o;
 }
-function borrar_bibliomatriz($ruta,$unibinop_s){
+function borrar_bibliomatriz($ruta,$unificado){
 	$o = (object)array();
 	$o->registro = array("Borrando bibliomatriz.");
-	$unibinop = intval($unibinop_s);
-	$o->tipo =      intdiv($unibinop,2**0)%2;
-	$o->unificado = intdiv($unibinop,2**1)%2;
-	generar_url  ($ruta,$o->unificado,$o);
+	generar_url  ($ruta,$unificado,$o);
 	$o->url = "libros/$o->url";
+	array_push($o->registro,"¿Es un JSON unificado?: $unificado;");
 	borrar_url($o->url,$o);
 	return $o;
 }
 
+
 declarar_get(array("f","r","n","u"));
 
-if(f=="c"){echo json_encode(crear_bibliomatriz(r,n,u));}
-if(f=="b"){echo json_encode(borrar_bibliomatriz(r,u));}
+if(f=="c"){
+	echo json_encode(crear_bibliomatriz(r,n,u));
+}
+if(f=="b"){
+	$u = u=="true"?1:0;
+	echo json_encode(borrar_bibliomatriz(r,$u));
+}
 
 ?>
