@@ -6,6 +6,10 @@ Una bibliomatriz es una biblioteca de matrices JSON, que son arrays bidimensiona
 
 Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especificaciones.
 
+## Funciones principales
+
+ - ✅ `crear_bibliomatriz`, `crear_tabla`, `apilar`, `buscar`, `cambiar`, `borrar_filas`, `borrar_tabla`, `borrar_bibliomatriz` y `ver`.
+
 ## Ejemplos de cada función:
 
 ```php
