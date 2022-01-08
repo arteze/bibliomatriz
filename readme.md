@@ -21,93 +21,78 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 ## Ejemplos de cada función:
 
 ```php
-$b = crear_bibliomatriz("b","B",3);   // bibma = c(ruta,nombre,unibinop)
-borrar_bibliomatriz($b);              // b(ruta,unificado)
-crear_tabla($b,"t",["c0","c1","c2"]); // c(bibma,tabla,fila)
-apilar($b,"t",["v0 v1 v2"]);          // a(bibma,tabla,fila)
-buscar($b,"t","c","v");               // b(bibma,tabla,clave,valor)
-cambiar($b,"t","c","v",["w0","w1"]);  // c(bibma,tabla,clave,valor,fila)
-borrar_filas($b,"t","c0","v");        // b(bibma,tabla,clave,valor)
-borrar_tabla($b,"t");                 // b(bibma,tabla)
-ver($b,"html",1);                     // v(bibma,formato,binop)
+$b = crear_bibliomatriz("b","B",3);   // c(url,nombre,tipo)
+borrar_bibliomatriz($b);              // b(url)
+crear_tabla($b,"t",["c0","c1","c2"]); // c(url,tabla,tipo,fila)
+apilar($b,"t",["v0 v1 v2"]);          // a(url,tabla,tipo,fila)
+cambiar($b,"t","c","v",["w0","w1"]);  // c(url,tabla,tipo,clave,valor,fila)
+buscar($b,"t","c","v");               // b(url,tabla,clave,valor)
+borrar_filas($b,"t","c0","v");        // b(url,tabla,clave,valor)
+borrar_tabla($b,"t");                 // b(url,tabla)
+ver($b,"html",1);                     // v(url,formato,binop)
 ```
 
 ## Explicaciones:
 
+ - `url`: Ruta de la bibliomatriz.
+   - Si termina en `.json` o en `.` es un archivo.
+   - Si termina en `.` se cambia a `.json`.
+   - De lo contrario, es una carpeta con archivos.
+
 ### ✅ `crear_bibliomatriz`: Crea una nueva bibliomatriz
 
- - `ruta`: Ruta de la carpeta o archivo JSON.
- - `unibinop`: Opciones binarias unificadas.
-
-Ociones de `unibinop`:
- 
- - `unificado`: Parámetro binario:
-   - Con valor `0` crea una carpeta.
-   - Con valor `1` crea solo un archivo.
+ - `url`: Ruta de la bibliomatriz.
+ - `nombre`: Nombre de la bibliomatriz.
  - `tipo`: Parámetro binario:
    - Con valor `0` fuerza el reemplazo.
    - Con valor `1` solo si no existe la crea.
 
-Para crear el parámetro `unibinop` es necesario hacer una multiplicación:
-
- - `unificado * 2 + tipo`
-
-De esta manera, `unibinop` tiene cuatro posibles estados:
-
- - `0` Crea la carpeta y fuerza el reemplazo.
- - `1` Crea la carpeta solo si no existe.
- - `2` Crea el archivo __.json__ y fuerza el reemplazo.
- - `3` Crea el archivo __.json__ solo si no existe.
-
 ### ✅ `borrar_bibliomatriz`: Borra la bibliomatriz
 
- - `ruta`: Ruta de la carpeta o archivo JSON.
- - `unificado`: Parámetro binario:
-   - Con valor `0` borra la carpeta.
-   - Con valor `1` borra el archivo __.json__.
+ - `url`: Ruta de la bibliomatriz.
 
 ### `crear_tabla`: Crea una nueva tabla
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `tabla`: Nombre de la tabla.
  - `fila`: Array de strings con los nombres de cada columna.
 
 ### `apilar`: Crea una nueva fila en una tabla
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `tabla`: Nombre de la tabla.
  - `fila`: Array de strings con los valores de cada columna.
 
-### `buscar`: Devuelve filas que coinciden con clave y valor
-
- - `bibma`: Biblioteca.
- - `tabla`: Nombre de la tabla.
- - `clave`: Nombre de la columna.
- - `valor`: Valor de la celda que pertenece a la columna.
-
 ### `cambiar`: Cambia el valor o los valores de una fila
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `tabla`: Nombre de la tabla.
  - `clave`: Nombre de la columna.
  - `valor`: Valor de la celda que pertenece a la columna.
  - `fila`: Array con el valor o los valores nuevos.
 
+### `buscar`: Devuelve filas que coinciden con clave y valor
+
+ - `url`: Ruta de la bibliomatriz.
+ - `tabla`: Nombre de la tabla.
+ - `clave`: Nombre de la columna.
+ - `valor`: Valor de la celda que pertenece a la columna.
+
 ### `borrar_filas`: Borra las filas que coinciden con clave y valor
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `tabla`: Nombre de la tabla.
  - `clave`: Nombre de la columna.
  - `valor`: Valor de la celda que pertenece a la columna.
 
 ### `borrar_tabla`: Borra la tabla
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `tabla`: Nombre de la tabla.
 
 ### `ver`: Convierte la bibliomatriz a diferentes formatos
 
- - `bibma`: Biblioteca.
+ - `url`: Ruta de la bibliomatriz.
  - `formato`: El formato que tendrá la bibliomatriz.
    - Si es `html_a` lo convierte a HTML en forma de tabla.
    - Si es `html_b` lo convierte a HTML en forma de texto.
@@ -119,5 +104,4 @@ De esta manera, `unibinop` tiene cuatro posibles estados:
 ## Notas
 
  - Un string (cadena en inglés), es una cadena de caracteres.
- - `bibma` es el parámetro que referencia a la bibliomatriz declarada.
  - Los que tienen el símbolo check ✅ ya están programados.
