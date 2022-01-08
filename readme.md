@@ -22,7 +22,7 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 
 ```php
 $b = crear_bibliomatriz("b","B",3);   // bibma = c(ruta,nombre,unibinop)
-borrar_bibliomatriz($b);              // b(bibma)
+borrar_bibliomatriz($b);              // b(ruta,unificado)
 crear_tabla($b,"t",["c0","c1","c2"]); // c(bibma,tabla,fila)
 apilar($b,"t",["v0 v1 v2"]);          // a(bibma,tabla,fila)
 buscar($b,"t","c","v");               // b(bibma,tabla,clave,valor)
@@ -61,7 +61,10 @@ De esta manera, `unibinop` tiene cuatro posibles estados:
 
 ### ✅ `borrar_bibliomatriz`: Borra la bibliomatriz
 
- - `bibma`: Biblioteca.
+ - `ruta`: Ruta de la carpeta o archivo JSON.
+ - `unificado`: Parámetro binario:
+   - Con valor `0` borra la carpeta.
+   - Con valor `1` borra el archivo __.json__.
 
 ### `crear_tabla`: Crea una nueva tabla
 
