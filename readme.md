@@ -22,7 +22,7 @@ ver($b,"html",1);                     // v(bibma,formato,binop)
 
 ## Explicaciones:
 
-### `crear_bibliomatriz`: Crea una nueva bibliomatriz
+### ✅ `crear_bibliomatriz`: Crea una nueva bibliomatriz
 
  - `ruta`: Ruta de la carpeta o archivo JSON.
  - `unibinop`: Opciones binarias unificadas.
@@ -97,4 +97,5 @@ Para crear el parámetro `unibinop` es necesario hacer una multiplicación:
 ## Notas
 
  - Un string (cadena en inglés), es una cadena de caracteres.
- - `bibma` es el parámetro que referencia a la bibliomatriz declarada. 
+ - `bibma` es el parámetro que referencia a la bibliomatriz declarada.
+ - Los que tienen el símbolo check ✅ ya están programados.
