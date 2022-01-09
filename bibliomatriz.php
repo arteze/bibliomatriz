@@ -4,6 +4,9 @@ ini_set("display_errors","1");
 ini_set("display_startup_errors","1");
 error_reporting(E_ALL);
 
+function oi($o,$propiedad){
+	return $o->$propiedad;
+}
 function declarar_get($array){
 	foreach( $array as $variable ){
 		define($variable, $_GET[$variable]??null);
@@ -30,13 +33,13 @@ function borrar_archivo($url,$o){
 function borrar_carpeta($url,$o){
 	$bin_url_inicio_barra = substr($url,0,1)== "/";
 	if($bin_url_inicio_barra){
-		array_push($o->registro,"ebia1 Advertencia: La carpeta '$url' es del sistema, por eso no se va a borrar.");
+		array_push($o->registro,"ebca1 Advertencia: La carpeta '$url' es del sistema, por eso no se va a borrar.");
 	}else{
 		$bin_borrar_carpeta = rmdir($url);
 		if($bin_borrar_carpeta){
-			array_push($o->registro,"ebca1 Carpeta '$url' borrada correctamente.");
+			array_push($o->registro,"ebca3 Carpeta '$url' borrada correctamente.");
 		}else{
-			array_push($o->registro,"ebca0 Advertencia: La carpeta '$url' no se pudo borrar.");
+			array_push($o->registro,"ebca2 Advertencia: La carpeta '$url' no se pudo borrar.");
 		}
 	}
 }
@@ -66,28 +69,28 @@ function crear_carpeta($url,$o){
 	if(!$bin_existe_url){
 		$bin_crear_carpeta = mkdir($url, 0777, true);
 		if($bin_crear_carpeta){
-			array_push($o->registro,"ecap3 Carpeta '$url' creada correctamente.");
+			array_push($o->registro,"eca3 Carpeta '$url' creada correctamente.");
 		}else{
-			array_push($o->registro,"ecap2 Advertencia: La carpeta '$url' no se pudo crear.");
+			array_push($o->registro,"eca2 Advertencia: La carpeta '$url' no se pudo crear.");
 		}
 	}else{
-		array_push($o->registro,"ecap0 Advertencia: La carpeta '$url' existía.");
+		array_push($o->registro,"eca0 Advertencia: La carpeta '$url' existía.");
 	}
 }
 function crear_archivo($url,$datos,$o){
 	$var_crear_archivo = file_put_contents($url,$datos);
+	if(!$datos){
+		$datos = "";
+	}
 	if($var_crear_archivo===strlen($datos)){
-		array_push($o->registro,"ecai1 Archivo '$url' creado correctamente.");
+		array_push($o->registro,"eco1 Archivo '$url' creado correctamente.");
 	}else{
 		if($var_crear_archivo===false){
-			array_push($o->registro,"ecai3 Advertencia: El archivo '$url' no se pudo crear.");
+			array_push($o->registro,"eco3 Advertencia: El archivo '$url' no se pudo crear.");
 		}else{
-			array_push($o->registro,"ecai2 Advertencia: El archivo '$url' se pudo crear, pero su contenido es parcial.");
+			array_push($o->registro,"eco2 Advertencia: El archivo '$url' se pudo crear, pero su contenido es parcial.");
 		}
 	}
-}
-function registro_url_tiene_info($url,$o){
-	array_push($o->registro,"euti La ruta '$url' contiene información.");
 }
 function crear_carpeta_si_no_existe($url,$o){
 	$retorno = 0;
@@ -95,7 +98,7 @@ function crear_carpeta_si_no_existe($url,$o){
 	if($bin_existe_url){
 		$bin_es_carpeta = is_dir("$url");
 		if($bin_es_carpeta){
-			array_push($o->registro,"euti La carpeta '$url' existía.");
+			array_push($o->registro,"ecas La carpeta '$url' existía.");
 			$retorno = 3;
 		}else{
 			borrar_url($url,$o);
@@ -118,7 +121,7 @@ function crear_archivo_si_no_existe($url,$datos,$o){
 			crear_archivo($url,$datos,$o);
 			$retorno = 3;
 		}else{
-			array_push($o->registro,"euti El archivo '$url' existía.");
+			array_push($o->registro,"edas El archivo '$url' existía.");
 			$retorno = 2;
 		}
 	}else{
@@ -127,14 +130,16 @@ function crear_archivo_si_no_existe($url,$datos,$o){
 	}
 	return $retorno;
 }
+
 function obtener_info($url){
 	return "Nombre de la bibliomatriz: $url
 ";
 }
 function crear_bibliomatriz_carpeta_contenido($o){
 	crear_archivo($o->url."/info.txt",obtener_info($o->nombre),$o);
-	crear_archivo($o->url."/bibliomatriz.json",$o->datos,$o);
+	crear_archivo($o->url."/bibma.json",$o->datos,$o);
 }
+
 function es_unificado($url){
 	return (substr($url,-1)=="."
 		  ||substr($url,-5)==".json"
