@@ -21,15 +21,15 @@ Advertencia: Proyecto en desarrollo, por ahora solo se hablará de las especific
 ## Ejemplos de cada función:
 
 ```php
-$b = crear_bibliomatriz("b","B",3);   // c(url,nombre,tipo)
-borrar_bibliomatriz($b);              // b(url)
-crear_tabla($b,"t",["c0","c1","c2"]); // c(url,tabla,tipo,fila)
-apilar($b,"t",["v0 v1 v2"]);          // a(url,tabla,tipo,fila)
-cambiar($b,"t","c","v",["w0","w1"]);  // c(url,tabla,tipo,clave,valor,fila)
-buscar($b,"t","c","v");               // b(url,tabla,clave,valor)
-borrar_filas($b,"t","c0","v");        // b(url,tabla,clave,valor)
-borrar_tabla($b,"t");                 // b(url,tabla)
-ver($b,"html",1);                     // v(url,formato,binop)
+$b = crear_bibliomatriz("b","B",1);     // c(url,nombre,tipo)
+borrar_bibliomatriz($b);                // b(url)
+crear_tabla($b,"t",1,["c0","c1","c2"]); // c(url,tabla,tipo,fila)
+apilar($b,"t",1,["v0 v1 v2"]);          // a(url,tabla,tipo,fila)
+cambiar($b,"t",1,"c","v",["w0","w1"]);  // c(url,tabla,tipo,clave,valor,fila)
+buscar($b,"t","c","v");                 // b(url,tabla,clave,valor)
+borrar_filas($b,"t","c0","v");          // b(url,tabla,clave,valor)
+borrar_tabla($b,"t");                   // b(url,tabla)
+ver($b,"html",1);                       // v(url,formato,binop)
 ```
 
 ## Explicaciones:
