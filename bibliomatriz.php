@@ -157,14 +157,14 @@ function crear_bibliomatriz($url,$nombre,$tipo){
 
 	$o->unificado = es_unificado($url);
 	$o->tipo = $tipo;
-	$up = $o->unificado?"Sí":"No";
-	$ip = $o->tipo?"Sí":"No";
+	$a = $o->unificado?"Sí":"No";
+	$b = $o->tipo?"Sí":"No";
 
 	generar_url($url,$o);
 	generar_datos($url,$o);
 	$o->nombre = $nombre;
 	
-	array_push($o->registro,"¿Es un JSON unificado?: $up; Crear solo si no existe: $ip; Nombre: $o->nombre");
+	array_push($o->registro,"¿Es un JSON unificado?: $a; Crear solo si no existe: $b; Nombre: $o->nombre");
 	if($o->tipo==0){
 		borrar_url($o->url,$o);
 		if($o->unificado==0){
@@ -192,21 +192,22 @@ function borrar_bibliomatriz($url){
 	$o = (object)array();
 	$o->registro = array("Borrando bibliomatriz.");
 	$o->unificado = es_unificado($url);
-	$up = $o->unificado?"Sí":"No";
+	$a = $o->unificado?"Sí":"No";
 	generar_url($url,$o);
-	array_push($o->registro,"¿Es un JSON unificado?: $up;");
+	array_push($o->registro,"¿Es un JSON unificado?: $a;");
 	borrar_url($o->url,$o);
 	return $o;
 }
 
-
-declarar_get(array("f","r","n","t"));
-
-if(f=="c"){
-	echo json_encode(crear_bibliomatriz(r,n,t));
+function programa(){
+	declarar_get(array("f","r","n","t"));
+	if(f=="c"){
+		echo json_encode(crear_bibliomatriz(r,n,t));
+	}
+	if(f=="b"){
+		echo json_encode(borrar_bibliomatriz(r));
+	}
 }
-if(f=="b"){
-	echo json_encode(borrar_bibliomatriz(r));
-}
+programa();
 
 ?>
