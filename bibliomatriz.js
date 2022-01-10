@@ -195,13 +195,20 @@ function crear_bibliomatriz(){
 function borrar_bibliomatriz(){
 	var unificado = +document.querySelector("#unificado").checked
 	var url = document.querySelector("#url").value
-	if(unificado){url += "."}
-	var f = (fetch(`bibliomatriz.php?f=b&r=${url}`)
-		.then(x=>x.text())
-		.then(x=>{
-			var analizado = JSON.parse(x)
-			mostrar_log(analizado.registro)
-			console.log(analizado)
-		})
-	)
+	var o = {}
+	if(url){
+		if(unificado){url += "."}
+		var f = (fetch(`bibliomatriz.php?f=b&r=${url}`)
+			.then(x=>x.text())
+			.then(x=>{
+				var analizado = JSON.parse(x)
+				mostrar_log(analizado.registro)
+				console.log(analizado)
+			})
+		)
+	}else{
+		o.registro = ["Borrando bibliomatriz."]
+		ls.array_push(o.registro,`La ruta '${url}' es nula.`)
+		mostrar_log(o.registro)
+	}
 }
