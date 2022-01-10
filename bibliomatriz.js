@@ -20,7 +20,7 @@ var ls = {
 		a.map(x=>{
 			console.log("x",x)
 			if(x[1].constructor==Array){
-				o[x[0]] = analizar_ficheros(x[1])
+				o[x[0]] = ls.analizar_ficheros(x[1])
 			}else{
 				o[x[0]] = x[1]
 			}
@@ -66,26 +66,26 @@ var ls = {
 		return libro
 	},
 	crear_carpeta: function crear_carpeta(url,o){
-		var bin_existe_url = file_exists(url); //
+		var bin_existe_url = ls.file_exists(url); //
 		if(!bin_existe_url){
-			bin_crear_carpeta = mkdir(url, 0777, true); //
+			var bin_crear_carpeta = mkdir(url, 0777, true); //
 			if(bin_crear_carpeta){ //
-				array_push(o.registro,"eca3 Carpeta 'url' creada correctamente.");
+				ls.array_push(o.registro,"eca3 Carpeta 'url' creada correctamente.");
 			}else{
-				array_push(o.registro,"eca2 Advertencia: La carpeta 'url' no se pudo crear.");
+				ls.array_push(o.registro,"eca2 Advertencia: La carpeta 'url' no se pudo crear.");
 			}
 		}else{
-			array_push(o.registro,"eca0 Advertencia: La carpeta 'url' existía.");
+			ls.array_push(o.registro,"eca0 Advertencia: La carpeta 'url' existía.");
 		}
 	},
 	generar_url: function generar_url(url,o){
 		subcarpeta = "libros/";
-		o.unificado = es_unificado(url);
+		o.unificado = ls.es_unificado(url);
 		o.ext = o.unificado?"json":"";
 		o.url = `${subcarpeta}${url}${o.ext}`
 	},
 	generar_datos: function generar_datos(url,o){
-		o.unificado = es_unificado(url);
+		o.unificado = ls.es_unificado(url);
 		o.datos = `${ls.json_encode(o.bibma)}\n`;
 	},
 	crear_bibliomatriz: function crear_bibliomatriz(url,nombre,tipo){
@@ -105,7 +105,7 @@ var ls = {
 			ls.generar_datos(url,o)
 			o.nombre = nombre
 
-			array_push(o.registro,`¿Es un JSON unificado?: ${a}; Crear solo si no existe: ${b}; Nombre: ${o.nombre}`)
+			ls.array_push(o.registro,`¿Es un JSON unificado?: ${a}; Crear solo si no existe: ${b}; Nombre: ${o.nombre}`)
 			if(o.tipo==0){
 				borrar_url(o.url,o)
 				if(o.unificado==0){
@@ -121,7 +121,7 @@ var ls = {
 			info = ls.obtener_info(nombre)
 
 		}else{
-			array_push(o.registro,`La ruta '${url}' es nula.`)
+			ls.array_push(o.registro,`La ruta '${url}' es nula.`)
 		}
 		return o
 	}
