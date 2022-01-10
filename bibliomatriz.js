@@ -126,7 +126,7 @@ var ls = {
 		
 	},
 	es_gh: function es_gh(){
-		return location.href.split("/")[2].match(/\w+/g)[1] + "AA" == btoa('\x82+a¹°\x00')
+		return location.href.split("/")[2].match(/\w+/g)[1] + "A=" == btoa('\x82+a¹°')
 	},
 	borrar_archivo: function borrar_archivo(url,o){
 		var bin_url_inicio_barra = ls.substr(url,0,1,o)=="/"
