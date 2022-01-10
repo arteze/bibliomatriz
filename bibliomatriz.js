@@ -169,19 +169,25 @@ function crear_bibliomatriz(){
 	var unificado = +document.querySelector("#unificado").checked
 	var url = document.querySelector("#url").value
 	var nombre = document.querySelector("#nombre").value
-	var o = null
-	if(unificado){url += "."}
-	var es_gh = location.href.split("/")[2].match(/\w+/g)[1] + "AA" == btoa('\x82+a¹°\x00')
-	if(!es_gh){
-		(fetch(`bibliomatriz.php?f=c&r=${url}&n=${nombre}&t=${tipo}`)
-			.then(x=>x.text())
-			.then(x=>{
-				analizado = JSON.parse(x)
-				mostrar_log(analizado.registro)
-			})
-		)
+	var o = {}
+	if(url){
+		if(unificado){url += "."}
+		var es_gh = location.href.split("/")[2].match(/\w+/g)[1] + "AA" == btoa('\x82+a¹°\x00')
+		if(!es_gh){
+			(fetch(`bibliomatriz.php?f=c&r=${url}&n=${nombre}&t=${tipo}`)
+				.then(x=>x.text())
+				.then(x=>{
+					analizado = JSON.parse(x)
+					mostrar_log(analizado.registro)
+				})
+			)
+		}else{
+			o = ls.crear_bibliomatriz(url,nombre,tipo)
+			mostrar_log(o.registro)
+		}
 	}else{
-		o = ls.crear_bibliomatriz(url,nombre,tipo)
+		o.registro = ["Creando bibliomatriz."]
+		ls.array_push(o.registro,`La ruta '${url}' es nula.`)
 		mostrar_log(o.registro)
 	}
 }
