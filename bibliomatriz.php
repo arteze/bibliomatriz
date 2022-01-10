@@ -15,7 +15,7 @@ function declarar_get($array){
 function borrar_archivo($url,$o){
 	$bin_url_inicio_barra = substr($url,0,1)=="/";
 	if($bin_url_inicio_barra){
-		array_push($o->registro,"ebia1 Advertencia: El archivo '$url' es del sistema, por eso no se va a borrar.");
+		array_push($o->registro,"abia1 Advertencia: El archivo '$url' es del sistema, por eso no se va a borrar.");
 	}else{
 		$bin_existe_archivo = file_exists($url);
 		if($bin_existe_archivo){
@@ -26,20 +26,20 @@ function borrar_archivo($url,$o){
 				array_push($o->registro,"ebia2 El archivo o carpeta '$url' existe, pero no se pudo borrar.");
 			}
 		}else{
-			array_push($o->registro,"ebia4 Advertencia: La ruta '$url' no contiene información, por eso no se va a borrar su contenido.");
+			array_push($o->registro,"abia4 Advertencia: La ruta '$url' no contiene información, por eso no se va a borrar su contenido.");
 		}
 	}
 }
 function borrar_carpeta($url,$o){
 	$bin_url_inicio_barra = substr($url,0,1)== "/";
 	if($bin_url_inicio_barra){
-		array_push($o->registro,"ebca1 Advertencia: La carpeta '$url' es del sistema, por eso no se va a borrar.");
+		array_push($o->registro,"abca1 Advertencia: La carpeta '$url' es del sistema, por eso no se va a borrar.");
 	}else{
 		$bin_borrar_carpeta = rmdir($url);
 		if($bin_borrar_carpeta){
 			array_push($o->registro,"ebca3 Carpeta '$url' borrada correctamente.");
 		}else{
-			array_push($o->registro,"ebca2 Advertencia: La carpeta '$url' no se pudo borrar.");
+			array_push($o->registro,"abca2 Advertencia: La carpeta '$url' no se pudo borrar.");
 		}
 	}
 }
@@ -60,7 +60,7 @@ function borrar_url($url,$o){
 			borrar_archivo($url,$o);
 		}
 	}else{
-		array_push($o->registro,"ebu Advertencia: La ruta '$url' es nula, por eso no se va a intentar borrar ningún archivo");
+		array_push($o->registro,"abo Advertencia: La ruta '$url' es nula, por eso no se va a intentar borrar ningún archivo");
 	}
 	return $o;
 }
@@ -71,10 +71,10 @@ function crear_carpeta($url,$o){
 		if($bin_crear_carpeta){
 			array_push($o->registro,"eca3 Carpeta '$url' creada correctamente.");
 		}else{
-			array_push($o->registro,"eca2 Advertencia: La carpeta '$url' no se pudo crear.");
+			array_push($o->registro,"aca2 Advertencia: La carpeta '$url' no se pudo crear.");
 		}
 	}else{
-		array_push($o->registro,"eca0 Advertencia: La carpeta '$url' existía.");
+		array_push($o->registro,"aca0 Advertencia: La carpeta '$url' existía.");
 	}
 }
 function crear_archivo($url,$datos,$o){
@@ -86,9 +86,9 @@ function crear_archivo($url,$datos,$o){
 		array_push($o->registro,"eco1 Archivo '$url' creado correctamente.");
 	}else{
 		if($var_crear_archivo===false){
-			array_push($o->registro,"eco3 Advertencia: El archivo '$url' no se pudo crear.");
+			array_push($o->registro,"aco3 Advertencia: El archivo '$url' no se pudo crear.");
 		}else{
-			array_push($o->registro,"eco2 Advertencia: El archivo '$url' se pudo crear, pero su contenido es parcial.");
+			array_push($o->registro,"aco2 Advertencia: El archivo '$url' se pudo crear, pero su contenido es parcial.");
 		}
 	}
 }
@@ -159,37 +159,40 @@ function crear_bibliomatriz($url,$nombre,$tipo){
 	$o = (object)array();
 	$o->bibma = array($url,$nombre);
 	$o->registro = array("Creando bibliomatriz.");
+	if($url){
+		$o->unificado = es_unificado($url);
+		$o->tipo = $tipo;
+		$a = $o->unificado?"Sí":"No";
+		$b = $o->tipo?"Sí":"No";
 
-	$o->unificado = es_unificado($url);
-	$o->tipo = $tipo;
-	$a = $o->unificado?"Sí":"No";
-	$b = $o->tipo?"Sí":"No";
-
-	generar_url($url,$o);
-	generar_datos($url,$o);
-	$o->nombre = $nombre;
-	
-	array_push($o->registro,"¿Es un JSON unificado?: $a; Crear solo si no existe: $b; Nombre: $o->nombre");
-	if($o->tipo==0){
-		borrar_url($o->url,$o);
-		if($o->unificado==0){
-			crear_carpeta($o->url,$o);
-			crear_bibliomatriz_carpeta_contenido($o);
+		generar_url($url,$o);
+		generar_datos($url,$o);
+		$o->nombre = $nombre;
+		
+		array_push($o->registro,"¿Es un JSON unificado?: $a; Crear solo si no existe: $b; Nombre: $o->nombre");
+		if($o->tipo==0){
+				borrar_url($o->url,$o);
+				if($o->unificado==0){
+						crear_carpeta($o->url,$o);
+						crear_bibliomatriz_carpeta_contenido($o);
+				}
+				if($o->unificado==1){
+						crear_archivo($o->url,$o->datos,$o);
+				}
 		}
-		if($o->unificado==1){
-			crear_archivo($o->url,$o->datos,$o);
+		if($o->tipo==1){
+				if($o->unificado==0){
+						$real_url_creada = crear_carpeta_si_no_existe($o->url,$o);
+						if( $real_url_creada==1 || $real_url_creada==2 ){
+								crear_bibliomatriz_carpeta_contenido($o);
+						}
+				}
+				if($o->unificado==1){
+						$real_url_creada = crear_archivo_si_no_existe($o->url,$o->datos,$o);
+				}
 		}
-	}
-	if($o->tipo==1){
-		if($o->unificado==0){
-			$real_url_creada = crear_carpeta_si_no_existe($o->url,$o);
-			if( $real_url_creada==1 || $real_url_creada==2 ){
-				crear_bibliomatriz_carpeta_contenido($o);
-			}
-		}
-		if($o->unificado==1){
-			$real_url_creada = crear_archivo_si_no_existe($o->url,$o->datos,$o);
-		}
+	}else{
+		array_push($o->registro,"La ruta '$url' es nula.");
 	}
 	return $o;
 }
