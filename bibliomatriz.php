@@ -201,9 +201,13 @@ function borrar_bibliomatriz($url){
 	$o->registro = array("Borrando bibliomatriz.");
 	$o->unificado = es_unificado($url);
 	$a = $o->unificado?"Sí":"No";
-	generar_url($url,$o);
-	array_push($o->registro,"¿Es un JSON unificado?: $a;");
-	borrar_url($o->url,$o);
+	if($url){
+		generar_url($url,$o);
+		array_push($o->registro,"¿Es un JSON unificado?: $a;");
+		borrar_url($o->url,$o);
+	}else{
+		array_push($o->registro,"La ruta '$url' es nula.");
+	}
 	return $o;
 }
 
