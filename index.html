@@ -8,26 +8,22 @@
 		<link rel="stylesheet" href="estilo.css" />
 	</head>
 	<body>
-		<p>
-			<div>
-				<a class="ina">JSON: <input type="checkbox" id="unificado" /></a>
-				<a class="ina">Crear solo si no existe: <input type="checkbox" id="tipo" /></a>
-				<a class="ina">Ruta: <input id="url" class="tin" /></a>
-				<a class="ina">Nombre: <input id="nombre" class="tin" /></a>
-			</div>
-			<div>
-				<button onclick="crear_bibliomatriz()" class="tin" >Crear</button>
-				<button onclick="borrar_bibliomatriz()" class="tin" >Borrar</button>
-				<button onclick="vaciar_log()" class="tin" >Vaciar log</button>
-			</div>
-		<!--/p-->
-		<div>Nota: La opción JSON crea un solo archivo unificando todas las tablas. Si se desactiva crea una carpeta.</div>
-		<p>
-			<div class="re0">
-				<div>Registro</div>
-				<pre class="re1">
-				</pre>
-			</div>
-		<!--/p-->
+		<div>
+			<a class="ina">JSON: <input type="checkbox" id="unificado" /></a>
+			<a class="ina">Crear solo si no existe: <input type="checkbox" id="tipo" /></a>
+			<a class="ina">Ruta: <input id="url" class="tin" /></a>
+			<a class="ina">Nombre: <input id="nombre" class="tin" /></a>
+		</div>
+		<div>
+			<button onclick="crear_bibliomatriz()" class="tin" >Crear</button>
+			<button onclick="borrar_bibliomatriz()" class="tin" >Borrar</button>
+			<button onclick="vaciar_log()" class="tin" >Vaciar log</button>
+		</div>
+		<div>Nota: La opción JSON crea un solo archivo unificando todas las tablas. Si se desactiva crea una carpeta.</div><br/>
+		<div class="re0">
+			<div>Registro</div>
+			<pre class="re1">
+			</pre>
+		</div>
 	</body>
 </html>
