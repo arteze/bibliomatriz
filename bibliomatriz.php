@@ -150,7 +150,8 @@ function crear_bibliomatriz_carpeta_contenido($o){
 	crear_archivo($o->url."/bibma.json",$o->datos,$o);
 }
 function generar_url($url,$o){
-	$subcarpeta = json_decode(file_get_contents("subcarpeta.json"))[0];
+	$asub = file_get_contents("subcarpeta.json");
+	$subcarpeta = json_decode($asub)[0];
 	$o->unificado = es_unificado($url);
 	$o->ext = $o->unificado?"json":"";
 	$o->url = "$subcarpeta/$url$o->ext";
