@@ -114,6 +114,9 @@ var ls = {
 		})
 		return a
 	},
+	debug_backtrace: function debug_backtrace(){
+		console.trace()
+	},
 	array_push: function array_push(a,b){
 		if(a.constructor==Array){
 			a.push(b)
@@ -232,6 +235,7 @@ var ls = {
 	},
 	es_gh: function es_gh(){
 		return location.href.split("/")[2].match(/\w+/g)[1] + "A=" == btoa('\x82+a¹°')
+			|| document.querySelector("#sinphp").checked
 	},
 	borrar_archivo: function borrar_archivo(url,o){
 		var bin_url_inicio_barra = ls.substr(url,[0,1],o)=="/"
