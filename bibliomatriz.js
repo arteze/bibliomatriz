@@ -549,3 +549,27 @@ function borrar_bibliomatriz(){
 		mostrar_log(o.registro)
 	}
 }
+
+document.onreadystatechange = function(x){
+	if(!window.t){
+		var a = [["JSON"              ,"unificado","checkbox"],
+			["Crear solo si no existe","tipo"     ,"checkbox"],
+			["Sin PHP"                ,"sinphp"   ,"checkbox"],
+			["Ruta","url"],
+			["Nombre","nombre"]
+		].map(x=>{
+			var a = ["a","input","a"].map(x=>document.createElement(x))
+			var div = document.querySelector("div")
+			a[0].className = "ina"
+			a[0].innerHTML = `${x[0]}: `
+			a[1].id = x[1]
+			a[1].className = "tin"
+			a[1].type = x[2]
+			a[2].innerHTML = " "
+			a[0].appendChild(a[1])
+			div.appendChild(a[0])
+			div.appendChild(a[2])
+		})
+		window.t = 1
+	}
+}
