@@ -552,23 +552,38 @@ function borrar_bibliomatriz(){
 
 document.onreadystatechange = function(x){
 	if(!window.t){
-		var a = [["JSON"              ,"unificado","checkbox"],
-			["Crear solo si no existe","tipo"     ,"checkbox"],
-			["Sin PHP"                ,"sinphp"   ,"checkbox"],
-			["Ruta","url"],
-			["Nombre","nombre"]
+		var a = [
+			["JSON"                   ,"unificado" ,1,0],
+			["Crear solo si no existe","tipo"      ,1,0],
+			["Sin PHP"                ,"sinphp"    ,1,0],
+			["Ruta"                   ,"url"       ,0,0],
+			["Nombre"                 ,"nombre"    ,0,0],
+			["crear_bibliomatriz"     ,"Crear"     ,0,1],
+			["borrar_bibliomatriz"    ,"Borrar"    ,0,1],
+			["vaciar_log"             ,"Vaciar log",0,1],
 		].map(x=>{
-			var a = ["a","input","a"].map(x=>document.createElement(x))
-			var div = document.querySelector("div")
-			a[0].className = "ina"
-			a[0].innerHTML = `${x[0]}: `
-			a[1].id = x[1]
-			a[1].className = "tin"
-			a[1].type = x[2]
-			a[2].innerHTML = " "
-			a[0].appendChild(a[1])
-			div.appendChild(a[0])
-			div.appendChild(a[2])
+			if(!x[3]){
+				var a = ["a","input","a"].map(x=>document.createElement(x))
+				var div = document.querySelector("div")
+				a[0].className = "ina"
+				a[0].innerHTML = `${x[0]}: `
+				a[1].id = x[1]
+				a[1].className = "tin"
+				a[1].type = x[2]?"checkbox":""
+				a[2].innerHTML = " "
+				a[0].appendChild(a[1])
+				div.appendChild(a[0])
+				div.appendChild(a[2])
+			}
+			if(x[3]){
+				console.log(x)
+				var u = document.createElement("button")
+				var div = document.querySelectorAll("div")[1]
+				u.addEventListener("click",x=>window[x[0]]())
+				u.className = "tin"
+				u.innerHTML = x[1]
+				div.appendChild(u)
+			}
 		})
 		window.t = 1
 	}
