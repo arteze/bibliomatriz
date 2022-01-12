@@ -576,7 +576,6 @@ document.onreadystatechange = function(x){
 				div.appendChild(a[2])
 			}
 			if(x[3]){
-				console.log(x)
 				var u = document.createElement("button")
 				var div = document.querySelectorAll("div")[1]
 				u.addEventListener("click",x=>window[x[0]]())
@@ -585,6 +584,8 @@ document.onreadystatechange = function(x){
 				div.appendChild(u)
 			}
 		})
+		var div = document.querySelectorAll("div")[2]
+		div.innerHTML = "Nota: La opción JSON crea un solo archivo unificando todas las tablas. Si se desactiva crea una carpeta."
 		window.t = 1
 	}
 }
